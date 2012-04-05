@@ -1,0 +1,46 @@
+<project name="DNS" basedir="." default="debug">
+
+	<!-- general information -->
+	<property name="base.dir" value="."/>
+	<property name="src.dir" value="${base.dir}/src"/>
+	<property name="bin.base.dir" value="${base.dir}/bin"/>
+	<property name="bin.debug.dir" value="${bin.base.dir}/debug" />
+	<property name="bin.release.dir" value ="${bin.base.dir}/release" />
+	<property name="dist.base.dir" value="${base.dir}/dist"/>
+
+	<!-- targets for compiling -->
+	<target name="clean-build" description="Clean build with and without debug (clean project and build project)" depends="clean, compilerelease, compiledebug"/>
+	<target name="build" description="Build project with and without debug information" depends="compile"/>
+	<target name="compile" description="Build project with and without debug information" depends="compilerelease, compiledebug"/>
+
+	<target name="clean-debug" description="Clean build (clean project and build project)" depends="clean,compiledebug"/>
+	<target name="debug" description="Build project" depends="compiledebug"/>
+
+	<target name="clean-release" description="Clean build without debug information (clean project and build project)" depends="clean,compilerelease"/>
+	<target name="release" description="Build project without debug information" depends="compilerelease"/>
+
+	<target name="compilerelease" description="Compile project without debug information">
+		<mkdir dir="${bin.release.dir}" />
+		<javac srcdir="${src.dir}" destdir="${bin.release.dir}" debug="false" fork="true" includeantruntime="false">
+		</javac>
+	</target>
+
+	<target name="compiledebug" description="Compile project">
+		<mkdir dir="${bin.debug.dir}" />
+		<javac srcdir="${src.dir}" destdir="${bin.debug.dir}" debug="true" fork="true" includeantruntime="false">
+		</javac>
+	</target>
+
+	<!-- clean up -->
+	<target name="clean" description="Clean project of all intermediate files">
+		<delete dir="${bin.base.dir}" />
+		<delete dir="${dist.base.dir}" />
+	</target>
+
+	<!-- misc stuff -->
+	<target name="help" description="Print this help">
+		<exec executable="ant">
+			<arg value="-p" />
+		</exec>
+	</target>
+</project>
