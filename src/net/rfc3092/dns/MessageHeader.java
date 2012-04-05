@@ -269,10 +269,10 @@ public class MessageHeader {
 		return data;
 	}
 
-	public int readFromByteArray(byte[] data, int start) {
+	public int fromByteArray(byte[] data, int start) {
 
 		if (start + HEADER_LENGTH > data.length) {
-			Log.write("MessageHeader.readFromByteArray: not enough data");
+			Log.write("MessageHeader.fromByteArray: not enough data");
 			return data.length;
 		}
 	

@@ -30,8 +30,6 @@ public class QuestionRecord {
 	// - if 0 then end of name
 	private byte[] _name;
 
-	private 
-
 
 	/* constructors */
 	
